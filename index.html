@@ -1,0 +1,69 @@
+<!doctype html>
+<!--
+ This page is shown when the extension button is clicked, because the
+ "browser_action" field in manifest.json contains the "default_popup" key with
+ value "popup.html".
+ -->
+<html>
+  <head>
+    <script>
+    function myFunction() 
+    {
+        /*we get our id here*/
+        var youtubeId=getParameterByName("youtubeId");
+
+        /*for some odd reason we have a = caracter at the beggining - we must remove it*/
+        /*check if it contains the = char*/
+        if(youtubeId.indexOf("=")!==-1)
+        {
+            
+            youtubeId=youtubeId.substring(1,youtubeId.length);
+            
+        }
+        
+        /*construct our page now*/
+        document.getElementById('video').src="//www.youtube-nocookie.com/embed/"+youtubeId+"?rel=0"
+    }
+    function getParameterByName(name) 
+    {
+        /*get tab value*/
+        url = window.location.href;
+        
+        /*split by given characters*/
+        name = name.replace(/[\[\]]/g, "\\$&");
+        var regex = new RegExp("[?&]" + name + "(=([^&#]*)|&|#|$)"),
+            results = regex.exec(url);
+        if (!results) return null;
+        if (!results[2]) return '';
+        return decodeURIComponent(results[2].replace(/\+/g, " "));
+    }    
+    </script>
+    <title>Ublock</title>
+    <style>
+        body {
+                padding: 30px;
+        }
+        a {
+                display: inline-block;
+                margin-bottom: 20px;
+                color: #000;
+                font-family: Arial, sans-serif;
+        }
+    </style>
+  </head>
+  <body body onload="myFunction()">
+    <a id="play-video" href="#">Salutare oameni buni - ublock rv 1.2</a><br />
+    <div class="row">
+        <div class="content-row">
+          <iframe id="video" width="420" height="315" src="//www.youtube-nocookie.com/embed/y6120QOlsfU?rel=0" frameborder="0" allowfullscreen></iframe>
+        </div>
+        <div class="content-row">
+               "Music is a moral law. It gives soul to the universe, wings to the mind, flight to the imagination, and charm and gaiety to life and to everything" Plato
+        </div>
+    
+    </div>
+    
+   
+  </body>
+</html>
+
